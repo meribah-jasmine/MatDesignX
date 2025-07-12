@@ -19,7 +19,7 @@
     <style>
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; }
-        /* FIX: Ensure Vanta backgrounds are behind content */
+        /* Ensure Vanta backgrounds are behind content */
         #vanta-bg { 
             width: 100%; 
             height: 100vh; 
@@ -30,26 +30,26 @@
         }
         #topology-bg { 
             width: 100%; 
-            height: 100%; /* Changed to 100% to fill its parent section */
+            height: 100%; 
             position: absolute; 
             top: 0; 
             left: 0; 
-            z-index: -1; /* This will be behind content within its section */
+            z-index: -1; 
         }
         .content-wrapper { 
             position: relative; 
-            z-index: 1; /* Higher z-index to bring content to front */
+            z-index: 1; 
             background-color: #111827; 
         }
         .hero-content { 
             position: relative; 
             z-index: 1; 
             height: 100vh; 
-            display: flex; /* Added for centering content */
-            align-items: center; /* Added for centering content */
-            justify-content: center; /* Added for centering content */
-            text-align: center; /* Added for centering content */
-            padding: 0 1rem; /* Add some padding for smaller screens */
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 0 1rem; 
         }
         #viewer { height: 500px; width: 100%; border-radius: 10px; margin-top: 2rem; background-color: #1F2937; }
         .chart-container { position: relative; width: 100%; max-width: 900px; margin: auto; height: 450px; }
@@ -87,15 +87,8 @@
         .floating-3d {
             animation: float 6s ease-in-out infinite;
         }
-        
-        .floating-3d:nth-child(2) {
-            animation-delay: -2s;
-        }
-        
-        .floating-3d:nth-child(3) {
-            animation-delay: -4s;
-        }
-        
+        .floating-3d:nth-child(2) { animation-delay: -2s; }
+        .floating-3d:nth-child(3) { animation-delay: -4s; }
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotateX(0deg); }
             50% { transform: translateY(-20px) rotateX(10deg); }
@@ -104,7 +97,6 @@
         .rotate-3d {
             animation: rotate3d 8s linear infinite;
         }
-        
         @keyframes rotate3d {
             0% { transform: rotateY(0deg) rotateX(0deg); }
             25% { transform: rotateY(90deg) rotateX(15deg); }
@@ -116,7 +108,6 @@
         .pulse-3d {
             animation: pulse3d 4s ease-in-out infinite;
         }
-        
         @keyframes pulse3d {
             0%, 100% { transform: scale(1) rotateZ(0deg); box-shadow: 0 0 20px rgba(79, 70, 229, 0.3); }
             50% { transform: scale(1.05) rotateZ(5deg); box-shadow: 0 0 40px rgba(129, 140, 248, 0.6); }
@@ -128,38 +119,15 @@
             height: 200px;
             margin: 0 auto;
         }
-        
         .orbit {
             position: absolute;
             border: 2px solid rgba(79, 70, 229, 0.3);
             border-radius: 50%;
             animation: orbit 10s linear infinite;
         }
-        
-        .orbit-1 {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
-        
-        .orbit-2 {
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
-            animation-duration: 7s;
-            animation-direction: reverse;
-        }
-        
-        .orbit-3 {
-            width: 40%;
-            height: 40%;
-            top: 30%;
-            left: 30%;
-            animation-duration: 5s;
-        }
-        
+        .orbit-1 { width: 100%; height: 100%; top: 0; left: 0; }
+        .orbit-2 { width: 70%; height: 70%; top: 15%; left: 15%; animation-duration: 7s; animation-direction: reverse; }
+        .orbit-3 { width: 40%; height: 40%; top: 30%; left: 30%; animation-duration: 5s; }
         .orbit-particle {
             position: absolute;
             width: 12px;
@@ -168,22 +136,9 @@
             border-radius: 50%;
             box-shadow: 0 0 15px rgba(129, 140, 248, 0.8);
         }
-        
-        .orbit-particle-1 {
-            top: -6px;
-            left: calc(50% - 6px);
-        }
-        
-        .orbit-particle-2 {
-            top: calc(50% - 6px);
-            right: -6px;
-        }
-        
-        .orbit-particle-3 {
-            bottom: -6px;
-            left: calc(50% - 6px);
-        }
-        
+        .orbit-particle-1 { top: -6px; left: calc(50% - 6px); }
+        .orbit-particle-2 { top: calc(50% - 6px); right: -6px; }
+        .orbit-particle-3 { bottom: -6px; left: calc(50% - 6px); }
         @keyframes orbit {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -195,7 +150,6 @@
             display: inline-block;
             transition: all 0.3s ease;
         }
-        
         .tech-icon:hover {
             transform: scale(1.2) rotateY(180deg);
             color: #818CF8;
@@ -208,7 +162,6 @@
             overflow: hidden;
             z-index: -1;
         }
-        
         .atom {
             position: absolute;
             width: 8px;
@@ -218,7 +171,6 @@
             box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
             animation: atomFloat 15s ease-in-out infinite;
         }
-        
         @keyframes atomFloat {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
             25% { transform: translate(100px, -50px) rotate(90deg); }
@@ -234,7 +186,6 @@
             transform-style: preserve-3d;
             transition: all 0.3s ease;
         }
-        
         .holographic-card:hover {
             transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
             box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
@@ -246,7 +197,6 @@
             height: 200px;
             margin: 0 auto;
         }
-        
         .dna-strand {
             position: absolute;
             width: 4px;
@@ -255,22 +205,74 @@
             border-radius: 2px;
             animation: dnaRotate 4s linear infinite;
         }
-        
-        .dna-strand:nth-child(1) {
-            left: 10px;
-            transform-origin: 50% 50%;
-        }
-        
-        .dna-strand:nth-child(2) {
-            right: 10px;
-            animation-delay: -2s;
-            transform-origin: 50% 50%;
-        }
-        
+        .dna-strand:nth-child(1) { left: 10px; transform-origin: 50% 50%; }
+        .dna-strand:nth-child(2) { right: 10px; animation-delay: -2s; transform-origin: 50% 50%; }
         @keyframes dnaRotate {
             0% { transform: rotateY(0deg) rotateZ(0deg); }
             100% { transform: rotateY(360deg) rotateZ(360deg); }
         }
+
+        /* NEW ANIMATIONS */
+        .crystal-bounce {
+            animation: crystalBounce 3s ease-in-out infinite;
+        }
+        @keyframes crystalBounce {
+            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+            50% { transform: translateY(-15px) scale(1.05) rotate(10deg); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 3D spinning cube for navigation */
+        .nav-cube-container {
+            perspective: 1000px;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .nav-cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spinCube 10s infinite linear;
+        }
+
+        .nav-cube-face {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: rgba(129, 140, 248, 0.4); /* Indigo-300 with transparency */
+            border: 1px solid #818CF8; /* Indigo-300 */
+            text-align: center;
+            line-height: 24px;
+            font-size: 14px;
+            color: #fff;
+            opacity: 0.9;
+        }
+
+        .nav-cube-face.front { transform: rotateY(0deg) translateZ(12px); }
+        .nav-cube-face.back { transform: rotateX(180deg) translateZ(12px); }
+        .nav-cube-face.right { transform: rotateY(90deg) translateZ(12px); }
+        .nav-cube-face.left { transform: rotateY(-90deg) translateZ(12px); }
+        .nav-cube-face.top { transform: rotateX(90deg) translateZ(12px); }
+        .nav-cube-face.bottom { transform: rotateX(-90deg) translateZ(12px); }
+
+        @keyframes spinCube {
+            from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+        }
+
     </style>
 </head>
 <body class="bg-gray-900 text-gray-300">
@@ -287,11 +289,47 @@
                 <a href="#about" class="hover:text-indigo-400 transition flex items-center">
                     <i class="fas fa-flask mr-2"></i>Our Story
                 </a>
-                <a href="#services" class="hover:text-indigo-400 transition flex items-center">
-                    <i class="fas fa-microchip mr-2"></i>Core Technology
+                <a href="#services-overview" class="hover:text-indigo-400 transition flex items-center">
+                    <div class="nav-cube-container">
+                        <div class="nav-cube">
+                            <div class="nav-cube-face front">S</div>
+                            <div class="nav-cube-face back">E</div>
+                            <div class="nav-cube-face right">R</div>
+                            <div class="nav-cube-face left">V</div>
+                            <div class="nav-cube-face top">I</div>
+                            <div class="nav-cube-face bottom">C</div>
+                        </div>
+                    </div>
+                    Services
+                </a>
+                <a href="#solutions" class="hover:text-indigo-400 transition flex items-center">
+                    <div class="nav-cube-container">
+                        <div class="nav-cube">
+                            <div class="nav-cube-face front">S</div>
+                            <div class="nav-cube-face back">O</div>
+                            <div class="nav-cube-face right">L</div>
+                            <div class="nav-cube-face left">U</div>
+                            <div class="nav-cube-face top">T</div>
+                            <div class="nav-cube-face bottom">I</div>
+                        </div>
+                    </div>
+                    Solutions
                 </a>
                 <a href="#ai-advantage" class="hover:text-indigo-400 transition flex items-center">
                     <i class="fas fa-brain mr-2"></i>AI Advantage
+                </a>
+                <a href="#team" class="hover:text-indigo-400 transition flex items-center">
+                    <div class="nav-cube-container">
+                        <div class="nav-cube">
+                            <div class="nav-cube-face front">T</div>
+                            <div class="nav-cube-face back">E</div>
+                            <div class="nav-cube-face right">A</div>
+                            <div class="nav-cube-face left">M</div>
+                            <div class="nav-cube-face top">!</div>
+                            <div class="nav-cube-face bottom">!</div>
+                        </div>
+                    </div>
+                    Team
                 </a>
                 <a href="#demo" class="hover:text-indigo-400 transition flex items-center">
                     <i class="fas fa-cube mr-2"></i>Demo
@@ -308,11 +346,17 @@
             <a href="#about" class="block py-3 px-4 text-sm hover:bg-gray-700 flex items-center">
                 <i class="fas fa-flask mr-3"></i>Our Story
             </a>
-            <a href="#services" class="block py-3 px-4 text-sm hover:bg-gray-700 flex items-center">
-                <i class="fas fa-microchip mr-3"></i>Core Technology
+            <a href="#services-overview" class="block py-3 px-4 text-sm hover:bg-gray-700 flex items-center">
+                <i class="fas fa-cogs mr-3"></i>Services
+            </a>
+            <a href="#solutions" class="block py-3 px-4 text-sm hover:bg-gray-700 flex items-center">
+                <i class="fas fa-lightbulb mr-3"></i>Solutions
             </a>
             <a href="#ai-advantage" class="block py-3 px-4 text-sm hover:bg-gray-700 flex items-center">
                 <i class="fas fa-brain mr-3"></i>AI Advantage
+            </a>
+            <a href="#team" class="block py-3 px-4 text-sm hover:bg-gray-700 flex items-center">
+                <i class="fas fa-users mr-3"></i>Team
             </a>
             <a href="#demo" class="block py-3 px-4 text-sm hover:bg-gray-700 flex items-center">
                 <i class="fas fa-cube mr-3"></i>Demo
@@ -390,7 +434,37 @@
             </div>
         </section>
 
-        <section class="py-20 px-6 bg-gray-800 relative" id="services">
+        <section class="py-20 px-6 bg-gray-800 relative" id="services-overview">
+            <div class="container mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-center mb-12 flex items-center justify-center">
+                    <i class="fas fa-hand-holding-box mr-4 text-indigo-400 crystal-bounce"></i>
+                    <span class="gradient-text">Our Services</span>
+                </h2>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-12">
+                    MatDesignX offers a suite of advanced computational services designed to accelerate your material research and development cycles.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up" data-aos-delay="0">
+                        <i class="fas fa-microchip tech-icon text-indigo-400"></i>
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">Quantum Simulation</h3>
+                        <p>Leverage our expertise in DFT and NEGF for precise material property prediction and device performance analysis.</p>
+                    </div>
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up" data-aos-delay="200">
+                        <i class="fas fa-robot tech-icon text-indigo-400"></i>
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">AI-Driven Discovery</h3>
+                        <p>Utilize machine learning models for high-throughput screening, inverse design, and accelerating simulation workflows.</p>
+                    </div>
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up" data-aos-delay="400">
+                        <i class="fas fa-code-branch tech-icon text-indigo-400"></i>
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">Custom Software Dev</h3>
+                        <p>We develop tailored computational tools and platforms to meet your specific research and industrial needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-6 bg-gray-800 relative" id="core-technology">
             <div class="container mx-auto" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-center mb-12 flex items-center justify-center">
                     <i class="fas fa-cogs mr-4 text-indigo-400 rotate-3d"></i>
@@ -448,7 +522,55 @@
             </div>
         </section>
 
-        <section class="py-20 px-6 relative" id="ai-advantage">
+        <section class="py-20 px-6 relative" id="solutions">
+            <div class="container mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-center mb-12 flex items-center justify-center">
+                    <i class="fas fa-puzzle-piece mr-4 text-indigo-400 crystal-bounce"></i>
+                    <span class="gradient-text">Our Solutions</span>
+                </h2>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-12">
+                    MatDesignX offers tailored solutions for various industries, accelerating innovation and overcoming material science challenges.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up">
+                        <img src="https://via.placeholder.com/100x100?text=Semiconductors" alt="Semiconductor icon" class="mx-auto mb-4 w-24 h-24 object-contain">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">Semiconductors</h3>
+                        <p>Accelerate the design of next-gen transistors, memory, and quantum computing components.</p>
+                    </div>
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up" data-aos-delay="100">
+                        <img src="https://via.placeholder.com/100x100?text=Pharma" alt="Pharma icon" class="mx-auto mb-4 w-24 h-24 object-contain">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">Pharmaceuticals</h3>
+                        <p>Discover novel drug candidates and optimize materials for drug delivery systems.</p>
+                    </div>
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up" data-aos-delay="200">
+                        <img src="https://via.placeholder.com/100x100?text=Energy" alt="Energy icon" class="mx-auto mb-4 w-24 h-24 object-contain">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">Energy & Batteries</h3>
+                        <p>Design high-performance materials for solar cells, batteries, and catalysts.</p>
+                    </div>
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up" data-aos-delay="300">
+                        <img src="https://via.placeholder.com/100x100?text=Aerospace" alt="Aerospace icon" class="mx-auto mb-4 w-24 h-24 object-contain">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">Aerospace</h3>
+                        <p>Develop lightweight, high-strength alloys and composites for extreme environments.</p>
+                    </div>
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up" data-aos-delay="400">
+                        <img src="https://via.placeholder.com/100x100?text=Biotech" alt="Biotech icon" class="mx-auto mb-4 w-24 h-24 object-contain">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">Biotechnology</h3>
+                        <p>Engineer biomaterials for medical implants, biosensors, and tissue engineering.</p>
+                    </div>
+                    <div class="holographic-card p-8 shadow-lg text-center fade-in-up" data-aos-delay="500">
+                        <img src="https://via.placeholder.com/100x100?text=Chemicals" alt="Chemicals icon" class="mx-auto mb-4 w-24 h-24 object-contain">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-400">Specialty Chemicals</h3>
+                        <p>Innovate new chemical compounds with desired properties for industrial applications.</p>
+                    </div>
+                </div>
+                <p class="text-center text-sm text-gray-400 mt-8">
+                    Note: Placeholder images are used above. Please replace them with actual icons from Freepik (e.g., search for "materials science icon," "semiconductor icon," "pharma icon," etc.) or your custom designs.
+                </p>
+            </div>
+        </section>
+
+        <section class="py-20 px-6 bg-gray-800 relative" id="ai-advantage">
             <div class="container mx-auto" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-center mb-4 flex items-center justify-center">
                     <i class="fas fa-brain mr-4 text-indigo-400 floating-3d"></i>
@@ -476,6 +598,54 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-6 relative" id="team">
+            <div class="container mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-center mb-12 flex items-center justify-center">
+                    <i class="fas fa-users-cog mr-4 text-indigo-400 rotate-3d"></i>
+                    <span class="gradient-text">Meet Our Visionary Team</span>
+                </h2>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-12">
+                    Our interdisciplinary team brings together decades of expertise in computational materials science, quantum physics, and artificial intelligence.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                    <div class="holographic-card p-6 text-center fade-in-up" data-aos-delay="0">
+                        <img src="https://via.placeholder.com/150x150?text=John+Doe" alt="John Doe" class="w-36 h-36 rounded-full mx-auto mb-4 border-4 border-indigo-500 shadow-lg object-cover">
+                        <h3 class="text-2xl font-bold text-indigo-400 mb-1">Dr. John Doe</h3>
+                        <p class="text-indigo-200 mb-3">Founder & CEO, Lead Scientist</p>
+                        <p class="text-gray-300">PhD in Materials Science with 20+ years in DFT & NEGF simulations. Visionary behind MatDesignX.</p>
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-indigo-400"><i class="fab fa-linkedin fa-lg"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-indigo-400"><i class="fab fa-twitter fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div class="holographic-card p-6 text-center fade-in-up" data-aos-delay="150">
+                        <img src="https://via.placeholder.com/150x150?text=Jane+Smith" alt="Jane Smith" class="w-36 h-36 rounded-full mx-auto mb-4 border-4 border-indigo-500 shadow-lg object-cover">
+                        <h3 class="text-2xl font-bold text-indigo-400 mb-1">Jane Smith</h3>
+                        <p class="text-indigo-200 mb-3">Head of AI Research</p>
+                        <p class="text-gray-300">Expert in machine learning for materials informatics and generative models. Driving our AI capabilities.</p>
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-indigo-400"><i class="fab fa-linkedin fa-lg"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-indigo-400"><i class="fab fa-github fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div class="holographic-card p-6 text-center fade-in-up" data-aos-delay="300">
+                        <img src="https://via.placeholder.com/150x150?text=David+Lee" alt="David Lee" class="w-36 h-36 rounded-full mx-auto mb-4 border-4 border-indigo-500 shadow-lg object-cover">
+                        <h3 class="text-2xl font-bold text-indigo-400 mb-1">David Lee</h3>
+                        <p class="text-indigo-200 mb-3">Computational Engineer</p>
+                        <p class="text-gray-300">Specializes in optimizing computational workflows and developing high-performance simulation tools.</p>
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-indigo-400"><i class="fab fa-linkedin fa-lg"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-indigo-400"><i class="fab fa-gitlab fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <p class="text-center text-sm text-gray-400 mt-8">
+                    Note: Placeholder images are used for team members. Replace with actual team photos.
+                </p>
             </div>
         </section>
         
@@ -656,14 +826,14 @@
             var stage = new NGL.Stage("viewer");
             stage.loadFile("rcsb://1 caffeine", { defaultRepresentation: true });
             stage.setParameters({ cameraType: 'perspective', backgroundColor: '0x1F2937' });
-            stage.handleResize(); // Ensure viewer resizes correctly
+            stage.handleResize(); 
 
             // Add auto-rotation
-            stage.animation.timeout = 1000; // time between frames in ms
-            stage.animation.tweenDuration = 500; // duration of tweening in ms
+            stage.animation.timeout = 1000; 
+            stage.animation.tweenDuration = 500; 
             stage.animation.onAfterEach = function () {
-                stage.compList[0].autoView(); // Automatically adjust camera after each change
-                stage.spin(null, {axis: [0, 1, 0], speed: 0.5}); // Spin around Y-axis
+                stage.compList[0].autoView(); 
+                stage.spin(null, {axis: [0, 1, 0], speed: 0.5}); 
             };
             stage.animation.play();
         });
@@ -677,27 +847,27 @@
                 labels: ['Quantum Mechanics', 'Machine Learning', 'Data Science', 'Experimental Validation', 'Materials Synthesis', 'Device Engineering'],
                 datasets: [{
                     label: 'MatDesignX',
-                    data: [90, 85, 70, 40, 30, 50], // Example data for MatDesignX
-                    backgroundColor: 'rgba(129, 140, 248, 0.4)', // Indigo-300 with transparency
-                    borderColor: '#818CF8', // Indigo-300
+                    data: [90, 85, 70, 40, 30, 50], 
+                    backgroundColor: 'rgba(129, 140, 248, 0.4)', 
+                    borderColor: '#818CF8', 
                     pointBackgroundColor: '#818CF8',
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: '#818CF8'
                 }, {
                     label: 'Traditional Research Labs',
-                    data: [95, 30, 50, 80, 70, 60], // Example data
-                    backgroundColor: 'rgba(79, 70, 229, 0.2)', // Indigo-600 with transparency
-                    borderColor: '#4F46E5', // Indigo-600
+                    data: [95, 30, 50, 80, 70, 60], 
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)', 
+                    borderColor: '#4F46E5', 
                     pointBackgroundColor: '#4F46E5',
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: '#4F46E5'
                 }, {
                     label: 'General AI Companies',
-                    data: [10, 95, 90, 10, 5, 20], // Example data
-                    backgroundColor: 'rgba(167, 139, 250, 0.2)', // Purple-400 with transparency
-                    borderColor: '#A78BFA', // Purple-400
+                    data: [10, 95, 90, 10, 5, 20], 
+                    backgroundColor: 'rgba(167, 139, 250, 0.2)', 
+                    borderColor: '#A78BFA', 
                     pointBackgroundColor: '#A78BFA',
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
@@ -716,7 +886,7 @@
                             color: 'rgba(255, 255, 255, 0.2)'
                         },
                         pointLabels: {
-                            color: '#E5E7EB', // Gray-200
+                            color: '#E5E7EB', 
                             font: {
                                 size: 14
                             }
@@ -724,16 +894,16 @@
                         suggestedMin: 0,
                         suggestedMax: 100,
                         ticks: {
-                            display: false, // Hide the numbers on the scale
+                            display: false, 
                             beginAtZero: true,
-                            color: '#9CA3AF' // Gray-400
+                            color: '#9CA3AF' 
                         }
                     }
                 },
                 plugins: {
                     legend: {
                         labels: {
-                            color: '#E5E7EB' // Gray-200
+                            color: '#E5E7EB' 
                         }
                     },
                     tooltip: {
