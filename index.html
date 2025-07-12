@@ -1,98 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MatDesignX</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-  <script src="https://unpkg.com/ngl@2.0.0-dev.38/dist/ngl.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-  <style>
-    html { scroll-behavior: smooth; }
-    #vanta-bg { width: 100%; height: 100vh; position: absolute; z-index: 0; }
-    .hero-content { position: relative; z-index: 1; }
-    #viewer { height: 500px; width: 100%; border: 2px solid #4f46e5; border-radius: 10px; margin-top: 2rem; }
-    body { font-family: 'Inter', sans-serif; }
-    @keyframes spin-slow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .animate-spin-slow {
-      animation: spin-slow 8s linear infinite;
-    }
-    .chart-container {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      height: 350px;
-      max-height: 400px;
-    }
-    @media (min-width: 768px) {
-      .chart-container { height: 400px; }
-    }
-    .gradient-text {
-      background: linear-gradient(to right, #0077B6, #004AAD);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .flowchart-step {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background-color: #CAF0F8;
-      color: #004AAD;
-      font-weight: 600;
-      border: 4px solid #90E0EF;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      transition: all 0.3s ease;
-    }
-    .flowchart-step:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
-    }
-    .flowchart-arrow {
-      color: #0077B6;
-      font-size: 2rem;
-      line-height: 1;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MatDesignX: Quantum Simulations for Next-Gen Materials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="https://unpkg.com/ngl@2.0.0-dev.38/dist/ngl.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        #vanta-bg { width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: -1; }
+        .content-wrapper { position: relative; z-index: 1; background-color: #111827; }
+        .hero-content { position: relative; z-index: 1; height: 100vh; }
+        #viewer { height: 500px; width: 100%; border-radius: 10px; margin-top: 2rem; background-color: #1F2937; }
+        .chart-container { position: relative; width: 100%; max-width: 900px; margin: auto; height: 450px; }
+        .gradient-text {
+            background: linear-gradient(to right, #818CF8, #A78BFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .flowchart-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background-color: #374151;
+            color: #E5E7EB;
+            font-weight: 600;
+            border: 4px solid #4F46E5;
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+            transition: all 0.3s ease;
+        }
+        .flowchart-step:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 25px rgba(129, 140, 248, 0.7);
+        }
+        .flowchart-arrow {
+            color: #6366F1;
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-gray-300">
 
-<!-- Existing Sections and Startup Guide will be injected here (already present in the canvas) -->
+    <!-- Vanta.js Background -->
+    <div id="vanta-bg"></div>
 
-<script>
-  AOS.init({ duration: 1200 });
-  VANTA.WAVES({
-    el: "#vanta-bg",
-    mouseControls: true,
-    touchControls: true,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    color: 0x1e3a8a,
-    shininess: 80.0,
-    waveHeight: 25.0,
-    waveSpeed: 0.5,
-    zoom: 1.0
-  });
+    <!-- Header & Nav -->
+    <header class="bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-white">MatDesign<span class="text-indigo-400">X</span></a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-indigo-400 transition">Our Story</a>
+                <a href="#services" class="hover:text-indigo-400 transition">Core Technology</a>
+                <a href="#ai-advantage" class="hover:text-indigo-400 transition">AI Advantage</a>
+                <a href="#demo" class="hover:text-indigo-400 transition">Demo</a>
+                <a href="#contact" class="hover:text-indigo-400 transition">Contact</a>
+            </div>
+             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-700">Our Story</a>
+            <a href="#services" class="block py-2 px-4 text-sm hover:bg-gray-700">Core Technology</a>
+            <a href="#ai-advantage" class="block py-2 px-4 text-sm hover:bg-gray-700">AI Advantage</a>
+            <a href="#demo" class="block py-2 px-4 text-sm hover:bg-gray-700">Demo</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-700">Contact</a>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-content flex items-center justify-center text-center" id="home">
+        <div data-aos="fade-up">
+            <h1 class="text-5xl md:text-7xl font-black mb-4 text-white">Designing the Future, <br/> <span class="gradient-text">One Atom at a Time.</span></h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">We unite quantum simulation with artificial intelligence to accelerate the discovery of next-generation materials.</p>
+            <a href="#about" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition text-lg">Discover Our Story</a>
+        </div>
+    </section>
 
-  // NGL 3D Viewer
-  const stage = new NGL.Stage("viewer");
-  stage.loadFile("https://files.rcsb.org/download/6M71.pdb", { defaultRepresentation: true });
-</script>
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
+        
+        <!-- About Section / Our Story -->
+        <section class="py-20 px-6" id="about">
+            <div class="container mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-center mb-12"><span class="gradient-text">From Scientist to Founder</span></h2>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-12">MatDesignX was born from a deep-seated expertise in computational materials science. Our journey began not in a boardroom, but in a research lab, leveraging decades of experience in Density Functional Theory (DFT) and Non-Equilibrium Green's Function (NEGF) to solve fundamental scientific challenges. We are building on this foundation to bridge the gap between pure research and real-world industrial applications.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
+                        <p class="text-5xl font-extrabold text-indigo-400">>$10B</p>
+                        <p class="mt-2 font-semibold">Market for Materials Informatics by 2030</p>
+                    </div>
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
+                        <p class="text-5xl font-extrabold text-indigo-400">35%</p>
+                        <p class="mt-2 font-semibold">Projected CAGR for AI in Drug Discovery</p>
+                    </div>
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
+                        <p class="text-5xl font-extrabold text-indigo-400">50%+</p>
+                        <p class="mt-2 font-semibold">R&D Time Reduction with Virtual Screening</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Services / Core Technology Section -->
+        <section class="py-20 px-6 bg-gray-800" id="services">
+            <div class="container mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-center mb-12"><span class="gradient-text">Our Core Technology</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-gray-900 p-8 rounded-lg shadow-lg transform transition hover:scale-105" data-aos="zoom-in-up">
+                        <h3 class="text-2xl font-bold mb-4 text-indigo-400">Density Functional Theory (DFT)</h3>
+                        <p class="mb-4">A powerful quantum mechanical method to predict the electronic structure and properties of materials from first principles.</p>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex"><span class="text-indigo-500 font-bold mr-2">▶</span><strong>Predicting Material Behavior:</strong> Calculate properties before synthesis.</li>
+                            <li class="flex"><span class="text-indigo-500 font-bold mr-2">▶</span><strong>Optimizing Processes:</strong> Understand synthesis and processing parameters.</li>
+                            <li class="flex"><span class="text-indigo-500 font-bold mr-2">▶</span><strong>Designing Novel Materials:</strong> Engineer materials with targeted properties.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-lg shadow-lg transform transition hover:scale-105" data-aos="zoom-in-up" data-aos-delay="150">
+                        <h3 class="text-2xl font-bold mb-4 text-indigo-400">Non-Equilibrium Green's Function (NEGF)</h3>
+                        <p class="mb-4">An indispensable formalism for simulating quantum transport and carrier dynamics in nanoscale electronic devices.</p>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex"><span class="text-indigo-500 font-bold mr-2">▶</span><strong>Device Performance:</strong> Model I-V characteristics of ultra-small transistors.</li>
+                            <li class="flex"><span class="text-indigo-500 font-bold mr-2">▶</span><strong>Optoelectronics:</strong> Simulate efficiency in LEDs and solar cells.</li>
+                            <li class="flex"><span class="text-indigo-500 font-bold mr-2">▶</span><strong>Emerging Tech:</strong> Analyze transport in spintronics and 2D materials.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Force Multiplier Section -->
+        <section class="py-20 px-6" id="ai-advantage">
+            <div class="container mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-center mb-4"><span class="gradient-text">The Force Multiplier: Artificial Intelligence</span></h2>
+                <p class="text-lg text-center max-w-4xl mx-auto mb-12">AI transforms computational science from a powerful tool into a revolutionary engine for discovery, addressing the core challenges of speed and complexity.</p>
+                <div class="bg-gray-800 p-8 rounded-lg shadow-2xl border border-gray-700 max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center" data-aos="fade-right">
+                            <h4 class="text-2xl font-bold text-indigo-400 mb-2">Accelerated Discovery</h4>
+                            <p>Use ML surrogates to screen thousands of materials in the time DFT analyzes one. Enable generative models to perform inverse design.</p>
+                        </div>
+                        <div class="text-center" data-aos="fade-up">
+                            <h4 class="text-2xl font-bold text-indigo-400 mb-2">Enhanced Simulation</h4>
+                            <p>Achieve up to 60% faster convergence in complex NEGF simulations. Improve DFT accuracy by using AI to correct for intrinsic errors.</p>
+                        </div>
+                        <div class="text-center" data-aos="fade-left">
+                            <h4 class="text-2xl font-bold text-indigo-400 mb-2">Automated Workflows</h4>
+                            <p>Deploy AI agents to translate natural language prompts into complex quantum chemistry calculations, democratizing access to your team.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3D Molecule Viewer & Chart Section -->
+        <section class="py-20 px-6 bg-gray-800" id="demo">
+            <div class="container mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-center mb-12"><span class="gradient-text">Interactive Demonstrations</span></h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h3 class="text-3xl font-semibold mb-4 text-center">Explore Caffeine in 3D</h3>
+                        <p class="mb-4 text-center">Visualize the caffeine molecule. Use your mouse to zoom and rotate the model.</p>
+                        <div id="viewer" data-aos="zoom-in"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-semibold mb-4 text-center">Our Place in the Ecosystem</h3>
+                        <p class="mb-4 text-center">The deep tech landscape is vibrant. Here's how we see the focus of key players.</p>
+                        <div class="bg-gray-900 p-4 rounded-lg shadow-lg" data-aos="zoom-in">
+                            <div class="chart-container">
+                                <canvas id="companyFocusChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Roadmap Section -->
+        <section class="py-20 px-6" id="roadmap">
+            <div class="container mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-center mb-16"><span class="gradient-text">Our Strategic Roadmap</span></h2>
+                <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-12">
+                    <div class="flowchart-step" data-aos="zoom-in">1. Find High-Value Problems</div>
+                    <div class="flowchart-arrow hidden md:block" data-aos="fade-left">➔</div>
+                    <div class="flowchart-step" data-aos="zoom-in" data-aos-delay="100">2. Leverage Existing Platforms</div>
+                    <div class="flowchart-arrow hidden md:block" data-aos="fade-left">➔</div>
+                    <div class="flowchart-step" data-aos="zoom-in" data-aos-delay="200">3. Integrate AI as a Differentiator</div>
+                    <div class="w-full md:hidden my-4 flex justify-center"><div class="flowchart-arrow transform rotate-90"></div></div>
+                    <div class="flowchart-arrow hidden md:block" data-aos="fade-left">➔</div>
+                    <div class="flowchart-step" data-aos="zoom-in" data-aos-delay="300">4. Build a Complementary Team</div>
+                    <div class="flowchart-arrow hidden md:block" data-aos="fade-left">➔</div>
+                    <div class="flowchart-step" data-aos="zoom-in" data-aos-delay="400">5. Form Strategic Partnerships</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="py-20 px-6 bg-gray-800" id="contact">
+            <div class="container mx-auto text-center" data-aos="zoom-in">
+                <h2 class="text-4xl font-bold mb-4"><span class="gradient-text">Let's Build the Future Together</span></h2>
+                <p class="mb-8 text-lg max-w-2xl mx-auto">Have a challenging materials science problem? We'd love to hear about it. Let’s collaborate on the future of materials.</p>
+                <a href="mailto:contact@matdesignx.com" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-8 rounded-lg transition text-xl inline-block">Contact Us</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 bg-gray-900 border-t border-gray-700">
+            <p>&copy; 2025 MatDesignX. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Vanta.js Initialization
+        VANTA.WAVES({
+            el: "#vanta-bg",
+            mouseControls: false,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x1e293b,
+            shininess: 30.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.50,
+            zoom: 0.8
+        });
+
+        // NGL 3D Viewer Initialization
+        document.addEventListener("DOMContentLoaded", function () {
+            const stage = new NGL.Stage("viewer", { backgroundColor: "#1F2937" });
+
+            // PDB data for Caffeine (CAF) embedded directly to avoid network errors.
+            const caffeinePdbData = `
+HEADER    DRUG                                    26-MAY-00   1CS5
+TITLE     CAFFEINE
+COMPND    CAFFEINE
+AUTHOR    GENERATED USING TRITON
+REMARK   1
+ATOM      1  N1  CAF A   1      -1.428   1.206   0.000  1.00  0.00           N
+ATOM      2  C2  CAF A   1      -0.079   1.220   0.000  1.00  0.00           C
+ATOM      3  N3  CAF A   1       0.573   0.063   0.000  1.00  0.00           N
+ATOM      4  C4  CAF A   1      -0.223  -1.029   0.000  1.00  0.00           C
+ATOM      5  C5  CAF A   1      -1.579  -0.949   0.000  1.00  0.00           C
+ATOM      6  C6  CAF A   1      -2.142   0.211   0.000  1.00  0.00           C
+ATOM      7  N7  CAF A   1       0.511  -2.222   0.000  1.00  0.00           N
+ATOM      8  C8  CAF A   1       1.677  -1.679   0.000  1.00  0.00           C
+ATOM      9  N9  CAF A   1       1.859  -0.421   0.000  1.00  0.00           N
+ATOM     10  O2  CAF A   1       0.435   2.316   0.000  1.00  0.00           O
+ATOM     11  O6  CAF A   1      -3.342   0.213   0.000  1.00  0.00           O
+ATOM     12  C10 CAF A   1      -2.201   2.452   0.000  1.00  0.00           C
+ATOM     13  C11 CAF A   1       2.001   0.781   0.000  1.00  0.00           C
+ATOM     14  C12 CAF A   1      -0.038  -3.493   0.000  1.00  0.00           C
+ATOM     15  H101 CAF A   1      -1.685   3.409   0.000  1.00  0.00           H
+ATOM     16  H102 CAF A   1      -2.858   2.493   0.890  1.00  0.00           H
+ATOM     17  H103 CAF A   1      -2.858   2.493  -0.890  1.00  0.00           H
+ATOM     18  H111 CAF A   1       1.484   1.738   0.000  1.00  0.00           H
+ATOM     19  H112 CAF A   1       2.658   0.822   0.890  1.00  0.00           H
+ATOM     20  H113 CAF A   1       2.658   0.822  -0.890  1.00  0.00           H
+ATOM     21  H8  CAF A   1       2.531  -2.348   0.000  1.00  0.00           H
+ATOM     22  H121 CAF A   1       0.519  -4.409   0.000  1.00  0.00           H
+ATOM     23  H122 CAF A   1      -0.695  -3.534   0.890  1.00  0.00           H
+ATOM     24  H123 CAF A   1      -0.695  -3.534  -0.890  1.00  0.00           H
+CONECT    1    2   12    6
+CONECT    2    3   10
+CONECT    3    4   13
+CONECT    4    5    7
+CONECT    5    6
+CONECT    6   11
+CONECT    7    8   14
+CONECT    8    9
+CONECT    9    4
+CONECT   12   15   16   17
+CONECT   13   18   19   20
+CONECT   14   22   23   24
+CONECT    8   21
+END
+`;
+            const stringBlob = new Blob([caffeinePdbData], { type: 'text/plain' });
+
+            // Load molecule from the embedded string blob
+            stage.loadFile(stringBlob, { ext: "pdb", defaultRepresentation: true })
+                .then(function (o) {
+                    o.autoView();
+                    console.log("Successfully loaded embedded molecule: Caffeine");
+                })
+                .catch(function (error) {
+                    console.error("NGL Error:", error);
+                    const viewer = document.getElementById("viewer");
+                    if(viewer) {
+                        viewer.innerHTML = `<div class="flex items-center justify-center h-full text-red-400 p-4">
+                                                <p>Error loading 3D model. There was an issue parsing the molecule data. Please check the console for details.</p>
+                                            </div>`;
+                    }
+                });
+
+             stage.setParameters({
+                lightColor: 0xdddddd,
+                lightIntensity: 1.0,
+                ambientColor: 0xdddddd,
+                ambientIntensity: 0.2
+            });
+        });
+
+        // Chart.js Initialization
+        const companyData = {
+            labels: [
+                'AI Materia', 'Aionics', 'Quantinuum', 
+                'Nanoacademic', 'Schrödinger', 'Aqemia', 'Foundation Alloy'
+            ],
+            datasets: [{
+                label: 'Materials Informatics',
+                data: [8, 9, 4, 3, 5, 2, 7],
+                backgroundColor: 'rgba(129, 140, 248, 0.6)',
+                borderColor: 'rgba(129, 140, 248, 1)',
+                borderWidth: 2
+            }, {
+                label: 'Device/Quantum Simulation',
+                data: [3, 4, 9, 9, 6, 7, 2],
+                backgroundColor: 'rgba(99, 102, 241, 0.6)',
+                borderColor: 'rgba(99, 102, 241, 1)',
+                borderWidth: 2
+            }, {
+                label: 'Drug/Bio Discovery',
+                data: [2, 7, 8, 2, 9, 10, 0],
+                backgroundColor: 'rgba(79, 70, 229, 0.6)',
+                borderColor: 'rgba(79, 70, 229, 1)',
+                borderWidth: 2
+            }]
+        };
+
+        const companyFocusChartCtx = document.getElementById('companyFocusChart').getContext('2d');
+        new Chart(companyFocusChartCtx, {
+            type: 'bar',
+            data: companyData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Relative Focus/Capability Score',
+                            color: '#D1D5DB',
+                            font: { size: 14 }
+                        },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#D1D5DB' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#D1D5DB', font: { size: 12 } }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Illustrative Focus Areas of Deep Tech Companies',
+                        font: { size: 18, weight: 'bold' },
+                        color: '#E5E7EB',
+                        padding: { bottom: 20 }
+                    },
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#D1D5DB', font: { size: 12 } }
+                    }
+                }
+            }
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
